@@ -1,0 +1,64 @@
+body
+ {
+     background-color: white;
+     color:black;
+     font-family: Sans-serif;
+ }
+
+p { text-align: justify; }
+
+a { text-decoration: underline; }
+a:link { color: #444; }
+a:visited { color: gray; }
+/*a:hover { background-color : #ddd; } */
+a:hover { color: black; text-shadow: 0px 0px 10px black; }
+
+h1
+ {
+     color: #444;
+ }
+
+li
+ {
+     padding-left: 5px;
+     padding-right: 5px;
+ }
+
+.lecture
+ {
+     width:60%;
+     border:1px solid #ddd;
+     padding:20px;
+ }
+
+.titre
+ {
+     color:black;
+     text-align: justify;
+ }
+
+.titre i { color:#444; }
+
+.citation
+ {
+     color:#444;
+     font-style:italic;
+     width:80%;
+     margin:auto;
+     text-align:justify;
+ }
+
+.citation:before { content:"« "; }
+.citation:after { content:" »"; }
+
+.amazon
+ {
+     display:block;
+     text-align:right;
+ }
+
+.noit
+ {
+  font-style: normal;
+ }
+

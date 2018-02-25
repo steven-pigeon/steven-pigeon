@@ -1,0 +1,123 @@
+#!/bin/bash
+
+# pour gerer les espaces dans les noms de fichiers
+# il faut delimiter les champs d'une facon 'impossible'
+# soit en ajoutant un formfeed (normalement devrait pas
+# exister dans un filename. (c'est vrai?))
+
+IFS=$'\f';
+
+rm Web/*
+
+cp photo.jpg Web/
+
+cat header.html > Web/index.html
+
+echo \<center\> >> Web/index.html
+
+date +%d/%m/%Y >> Web/index.html
+
+echo \<br\>\<br\>\<br\>\<br\> >> Web/index.html
+
+files=`find  Sources/*jpg Sources/*JPG Sources/*jpeg Sources/*JPEG -printf "%p\f"`
+nb_files=0
+
+for i in $files
+do
+  nb_files=$((nb_files+1))
+done
+
+idx=0
+
+#rename d'abord les fichiers (sans changer les paths)
+(
+for i in $files 
+do 
+
+ ti=$i;
+ 
+ ti=`basename "$i"`;
+ ti=${ti%.*};
+ ti=`echo $ti | tr A-Z a-z`
+ t=`basename $ti`.thumb.jpg
+ j=`basename $ti`.resized.jpg;
+ h=`basename $ti`.show.html
+
+ echo -n -e "\r"now processing $i"\033"[K  1>&2
+  
+ # crap pour faire un image SRC + new target
+ echo \<a href=\""$h"\" target=\"_blank\"\>\<img src=\""$t"\" border=0 alt=\""$ti"\"\>\</a\> >> Web/index.html
+ 
+
+ # crap pour faire un HTML qui montre l'image centree
+ echo \<body bgcolor="#000050" text = "#FFFFFF" link="#ffff00" vlink="#00ffff"\> > "$h"
+ echo \<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8"\> >> "$h"
+ echo \<br\>\<br\>\<br\> >> "$h"
+
+ #verifier s'il y a une description
+ desc=Sources/`basename "$i"`.desc
+
+ if [ -f $desc ]
+ then
+      echo " "\(found desc\) 1>&2
+      echo \<br\>\<br\>\<br\>\<br\> >> "$h"
+      echo \<table width="60%" align="center" >> "$h"
+      echo cellpadding=20 >> "$h"
+      echo style=\"background-color\:\#000040\;color\:\#ffffff\;border\:1px solid \#004080\"\> >> "$h"
+
+      echo \<tr\>  >> "$h"
+      echo \<td style=\"text-aligned\:justify\" \> >> "$h"
+
+      cat $desc >> "$h"
+
+      echo \</td\> >> "$h"
+      echo \</tr\> >> "$h"
+      echo \</table\> >> "$h"
+      echo \<br\>\<br\>\<br\>\<br\> >> "$h"
+ fi
+
+
+# echo \<br\>\<br\>\<br\>\<br\> >> "$h"
+ echo \<center\> >> "$h"
+ echo \<img src=\""$j"\" border=0  style=\"border\:1px solid white\" \> >> "$h"
+ echo \<br\>\<br\>\<br\>\&copy\; Steven Pigeon >> "$h"
+
+
+ echo \<br\>\<br\>\<br\>\<br\> >> "$h"
+ #fin du HTML pour montrer l'image
+
+ mv "$h" Web/"$b"
+
+ cp $i $t
+ cp $i $j
+
+ # crap pour faire les thumbnails
+ mogrify   -quality 85 -resize 150x150  -sharpen 10 "$t"
+ cp slide.jpg s.jpg
+ mogrify   -quality 85 -frame 2x2 "$t"
+ composite -quality 85 -gravity center  -compose atop "$t" s.jpg s.jpg
+ mogrify   -quality 85 -resize 150x150 s.jpg
+ mv s.jpg Web/"$t"
+ rm "$t"
+
+ # pour produire une image basse resolution
+ mogrify -resize 900x900\> -quality 85 "$j"
+ mv "$j" Web/"$j"
+ 
+ idx=$((idx+1))
+ echo $(( (idx*100)/$nb_files ))
+
+
+done
+) | zenity --progress --auto-close --title "ThumbScript" --width=250 
+
+
+wait
+
+echo -n -e "\r\033"[K  1>&2
+
+echo \<br\>\<br\>\<br\>\<br\> >> Web/index.html
+echo \</body\> >> Web/index.html
+echo \</html\> >> Web/index.html
+
+

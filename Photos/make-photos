@@ -1,0 +1,112 @@
+#!/bin/bash
+
+# grandement simplifié, 3/1/2017
+
+count_params() { echo $#; }
+
+
+log=$(date +%F-%T | sed s/:/-/g).log
+echo logging to $log
+
+(
+
+IFS=$'\n';
+
+rm du-jour/* 2> $log
+
+cat header.html > du-jour/index.html
+
+echo \<b\> \
+     $(date +%d/%m/%Y) \
+     \</b\>\<br\>\<br\> \
+     >> du-jour/index.html
+
+
+# trouvons les fichiers
+files=$(find Sources/*jpg \
+             Sources/*JPG \
+             Sources/*jpeg \
+             Sources/*JPEG \
+             Sources/*png \
+             Sources/*PNG \
+             Sources/*gif \
+             Sources/*GIF \
+             Sources/*TIF \
+             Sources/*tiff \
+             Sources/*tif \
+             -printf "%p\n" | sort)
+
+nb_files=$(count_params ${files[@]})
+
+nb=0
+for filename in $files 
+do 
+ 
+ bname=$(basename "$i")$
+ bname="${ti%.*}"
+ bname=$(echo "$ti" | tr A-Z a-z)
+ ext=${i#*.}
+ ext=$(echo $ext | tr A-Z a-z)
+
+
+ new_name=$(printf "%04d" $nb)
+ prev_name=$(printf "%04d" $(( (nb+nb_files-1) % nb_files)))
+ next_name=$(printf "%04d" $(( (nb+1) % nb_files)))
+
+ t=$new_name.thumb.$ext
+ j=$new_name.resized.jpg
+ h=$new_name.show.html
+ thumb_name=$new_name.thumb.png
+
+ echo "$filename" -\> $j
+  
+ # crap pour faire un image SRC + new target
+ echo \<a href=\""$h"\" target=_blank\> \
+      \<img src=\""$thumb_name"\" \
+      style\=\"border:1px solid black\;\"\>\</a\>\&emsp\;\
+      >> du-jour/index.html
+ 
+
+ # pour faire un HTML pour chaque image
+ cat photo-header.html > "$h"
+
+ echo -n \<a href=\"$prev_name.show.html\" \>\&lt\;préc\</a\> >> "$h"
+ echo -n \&nbsp\; >> "$h"
+ echo \<a href=\"$next_name.show.html\" \>suiv\&gt\;\</a\> >> "$h"
+ echo \<br\>\<br\> >> "$h"
+ echo \<img src=\""$j"\" style=\"border\:1px solid black\" align=top\> >> "$h"
+ cat photo-footer.html >> "$h"
+ #fin du HTML pour montrer l'image
+ 
+
+ mv "$h" du-jour/"$b"
+
+ convert "$filename" \
+         -strip \
+         -quality 85 \
+         -resize 150x150 \
+         -sharpen 10 \
+         z.jpg
+
+ mv z.jpg du-jour/$thumb_name
+
+ # pour produire une image basse resolution
+ convert "$filename" \
+         -strip \
+         -resize 1000x1000 \
+         -quality 95 \
+         z.jpg
+ 
+ mv z.jpg du-jour/"$j"
+ 
+ 
+ idx=$((idx+1))
+ nb=$((nb+1))
+
+done
+cat footer.html >> du-jour/index.html
+
+) 2>&1 | tee $log
+
+
+

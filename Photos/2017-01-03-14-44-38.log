@@ -1,0 +1,17 @@
+find: ‘Sources/*JPG’: No such file or directory
+find: ‘Sources/*jpeg’: No such file or directory
+find: ‘Sources/*JPEG’: No such file or directory
+find: ‘Sources/*png’: No such file or directory
+find: ‘Sources/*PNG’: No such file or directory
+find: ‘Sources/*gif’: No such file or directory
+find: ‘Sources/*GIF’: No such file or directory
+find: ‘Sources/*TIF’: No such file or directory
+Sources/IMG_1251 - IMG_1253.tiff -> 0000.resized.jpg
+Sources/IMG_3866.tiff -> 0001.resized.jpg
+Sources/IMG_4053 - IMG_4055-4.tif -> 0002.resized.jpg
+Sources/IMG_4115.tiff -> 0003.resized.jpg
+Sources/IMG_4133.tiff -> 0004.resized.jpg
+Sources/IMG_5143.tiff -> 0005.resized.jpg
+Sources/IMG_5149.tiff -> 0006.resized.jpg
+Sources/IMG_9482-3.tiff -> 0007.resized.jpg
+Sources/PICT0141.jpg -> 0008.resized.jpg

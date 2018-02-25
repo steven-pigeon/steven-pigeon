@@ -1,0 +1,61 @@
+<html>
+<head>
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <link rel="stylesheet" type="text/css" href="../steven.css">
+  <style>body{background-color: #eee;}</style>
+</head>
+<!-- -------------------------------------------------------------------- -->
+<div style="position:relative;
+            left:10px;
+            top:0px;
+            padding:15px;
+            margin-right:50px;
+            ">
+  
+<h1>Vit&aelig;</h1>
+<br>
+
+<p>J'ai fait mes études supérieures à l'<a
+href="http://www.iro.umontreal.ca" target=_blank>université de Montréal</a>. J'ai fait ma
+maîtrise sur les processeurs à logique programmable et ma thèse de doctorat
+sur la compression de données. Vous trouverez mes publications <a
+href="../Publications/index.html">ici</a>.</p>
+
+<p>Je m'intéresse aux implémentations efficaces de toutes sortes
+d'algorithmes, y compris ceux de compression de données. En particulier,
+ces derniers temps, je me suis intéressé aux codeurs entropiques &mdash;
+codeurs Huffman, universels et arithmétiques &mdash; appliqués aux
+processeurs embarqués. Un processeur embarqué dispose de très peu de
+mémoire vive et d'une vitesse de calcul réduite. Par contre, ils disposent
+souvent d'un jeu d'instructions astucieux ainsi que d'une mémoire morte (en
+fait, de la <i>flash</i>) presque spacieuse.</p>
+
+<p>Je m'intéresse aussi aux structures de données efficaces en temps et en
+mémoire. C'est certes pratique dans les environnements embarqués, mais
+aussi dans les environnements d'ordinateurs de type
+«&nbsp;workstation&nbsp;» où il est parfois nécessaire de créer des
+structures de données contenant des millions (des milliards!) d'items.</p>
+
+<p>J'ai travaillé pendant 5 ou 6 ans sur les applications de transcodage
+vidéo comme chercheur à la chaire d'optimisation vidéo Vantrix/ÉTS. Si vous
+désirez en connaître plus sur les applications de l'adaptation multimédia,
+consultez mes <a href="../Publications/index.html">publications</a>. En
+2011&ndash;2012, j'ai été <b>Architecte principal des systèmes</b>
+au <a href="http://www.iro.umontreal.ca/" target=_blank>DIRO</a>, auquel je
+me suis joint en tant que chercheur/architecte pour la chaire industrielle
+Ubisoft. Le but de la chaire est d'appliquer les techniques de <i>machine
+learning</i> aux nouveaux défis qu'amènent les jeux <i>next-gen</i>.</p>
+
+<p>Depuis décembre 2012, je suis professeur agrégé au département de
+mathématiques, informatique, et génie à l'<a href="http://www.uqar.ca/"
+target=_blank>UQAR</a>, l'université du Québec à Rimouski. J'y enseigne
+l'informatique et j'y poursuis mes recherches amorcées à l'ÉTS en
+adaptation multimédia / compression / traitement de signal, mais aussi en
+structures de données efficaces.</p>
+<br>
+
+</div>
+
+
+</body>
+</html>
