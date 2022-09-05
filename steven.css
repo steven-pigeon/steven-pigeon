@@ -28,6 +28,7 @@ li
  {
      width:60%;
      border:1px solid #ddd;
+     background-color: #eee;
      padding:20px;
  }
 
@@ -50,12 +51,6 @@ li
 
 .citation:before { content:"« "; }
 .citation:after { content:" »"; }
-
-.amazon
- {
-     display:block;
-     text-align:right;
- }
 
 .noit
  {
